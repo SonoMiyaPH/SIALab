@@ -116,6 +116,7 @@ public class BattleManager : MonoBehaviour
                 if (target == null) break;
 
                 Debug.Log($"{attacker.unitName} attacks {target.unitName}");
+                attacker.PlayAttack();
                 target.TakeDamage(attacker.attack);
 
                 OnTurnEnded?.Invoke(attacker);
@@ -212,6 +213,7 @@ public class BattleManager : MonoBehaviour
             if (target != null)
             {
                 Debug.Log($"{actingUnit.unitName} attacks {target.unitName}");
+                actingUnit.PlayAttack();
                 target.TakeDamage(actingUnit.attack);
             }
             actingUnit.GainUltimateCharge();
@@ -219,6 +221,8 @@ public class BattleManager : MonoBehaviour
         else if (pendingChosenAbility != null)
         {
             bool wasUltimate = pendingChosenAbility == actingUnit.ultimate;
+            actingUnit.PlayAttack(); // reuses the same Attack trigger for skills/ultimates for now;
+                                      // see the note below if you want separate cast animations later
             pendingChosenAbility.chosenTarget = target;
             pendingChosenAbility.Execute(actingUnit, playerUnits, enemyUnits);
             pendingChosenAbility.chosenTarget = null;

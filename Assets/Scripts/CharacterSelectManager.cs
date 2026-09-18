@@ -14,6 +14,9 @@ public class CharacterSelectManager : MonoBehaviour
     [Tooltip("Scene to load once the player confirms their party of 3.")]
     public string nextSceneName = "LevelSelect";
 
+    [Tooltip("Shared panel that shows the hovered/clicked character's portrait, stats, and abilities.")]
+    public CharacterDetailsPanel detailsPanel;
+
     List<CharacterClass> selected = new List<CharacterClass>();
     List<CharacterSelectButton> allButtons = new List<CharacterSelectButton>();
 
@@ -21,6 +24,12 @@ public class CharacterSelectManager : MonoBehaviour
     {
         allButtons.Add(button);
         button.Refresh(GameProgress.IsCharacterUnlocked(button.characterClass), false);
+    }
+
+    // Called by a CharacterSelectButton on hover or click.
+    public void ShowDetails(CharacterSelectButton button)
+    {
+        if (detailsPanel != null) detailsPanel.Show(button);
     }
 
     // Called by a CharacterSelectButton when clicked.

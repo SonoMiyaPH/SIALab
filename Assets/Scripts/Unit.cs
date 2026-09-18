@@ -40,6 +40,12 @@ public class Unit : MonoBehaviour
     // to know anything about UI.
     public event Action<int, int> OnHealthChanged; // (currentHP, maxHP)
 
+    // Animation hooks - a UnitAnimator subscribes to these to trigger the
+    // right Animator state, without Unit needing to know anything about
+    // animation.
+    public event Action OnAttackTriggered; // this unit just performed an attack/ability
+    public event Action OnDamaged;         // this unit just took damage (not healed)
+
     void Awake()
     {
         currentHP = maxHP;
@@ -51,6 +57,14 @@ public class Unit : MonoBehaviour
 
     public int EffectiveDefense => defense + defenseBuffAmount;
 
+    // Call this when the unit performs a basic attack OR uses an
+    // ability/ultimate, so its attack animation plays. BattleManager
+    // calls this right before applying the effect.
+    public void PlayAttack()
+    {
+        OnAttackTriggered?.Invoke();
+    }
+
     // Basic damage formula: attacker's attack minus this unit's effective
     // defense, minimum 1 damage so fights always progress.
     public void TakeDamage(int rawAttack)
@@ -59,6 +73,7 @@ public class Unit : MonoBehaviour
         currentHP = Mathf.Max(0, currentHP - dmg);
         Debug.Log($"{unitName} took {dmg} damage ({currentHP}/{maxHP} HP left)");
         OnHealthChanged?.Invoke(currentHP, maxHP);
+        OnDamaged?.Invoke();
     }
 
     public void Heal(int amount)
@@ -85,6 +100,7 @@ public class Unit : MonoBehaviour
             bleedTurnsRemaining--;
             Debug.Log($"{unitName} bleeds for {bleedDamagePerTurn} ({currentHP}/{maxHP} HP left)");
             OnHealthChanged?.Invoke(currentHP, maxHP);
+            OnDamaged?.Invoke();
         }
 
         if (isStunned)
