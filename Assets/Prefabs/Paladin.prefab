@@ -359,7 +359,7 @@ MonoBehaviour:
   isPlayerUnit: 1
   maxHP: 100
   currentHP: 0
-  attack: 20
+  attack: 100
   defense: 10
   isTaunting: 0
   isStunned: 0

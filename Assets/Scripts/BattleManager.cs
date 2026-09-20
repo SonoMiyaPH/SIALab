@@ -24,8 +24,8 @@ using UnityEngine;
 public class BattleManager : MonoBehaviour
 {
     [Header("Setup - drag your Unit GameObjects here")]
-    public List<Unit> playerUnits;
-    public List<Unit> enemyUnits;
+    public List<Unit> playerUnits = new List<Unit>();
+    public List<Unit> enemyUnits = new List<Unit>();
 
     [Header("Pacing")]
     public float delayBetweenActions = 0.6f; // seconds, just so results are readable

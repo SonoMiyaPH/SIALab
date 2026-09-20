@@ -354,6 +354,7 @@ GameObject:
   - component: {fileID: 8160283903864691013}
   - component: {fileID: 3391295139253118009}
   - component: {fileID: 8548067339606971916}
+  - component: {fileID: 6449702942095259899}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Untagged
@@ -492,7 +493,7 @@ MonoBehaviour:
   isPlayerUnit: 0
   maxHP: 100
   currentHP: 0
-  attack: 10
+  attack: 200
   defense: 5
   isTaunting: 0
   isStunned: 0
@@ -573,3 +574,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6449702942095259899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5011544295945365332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb69282150996b1408ba513fb68f61f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
